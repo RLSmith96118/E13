@@ -8,17 +8,27 @@
   <canvas id="myChart"></canvas>
   <script>
   const data = {
-    'Poo': 185134,
-    'Lemons': 195514,
+    'Poo': 85134,
+    'Lemons': 95514,
     'Goats': 80460,
     'Chemicals': 57022,
-    'Flouride': 22165,
-    'Frogs': 27862
-  };
-  
+    'Flouride': 32165,
+    'Frogs': 67022,
+    'Blood': 90460,
+    'Poop': 85134,
+    'Bodies': 49420,
+    'MCFC': 49420,
+    'French Lemons': 100000,
+    'Tips': 130000,
+    'Trollies': 100000,
+    'British Apples': 49420,
+    'Water': 49420
+  }
+
   const ctx = document.getElementById('myChart').getContext('2d');
+  let delayed;
   const myChart = new Chart(ctx, {
-    type: 'line',
+    type: 'polarArea',
     data: {
       labels: Object.keys(data),
       datasets: [
@@ -28,6 +38,28 @@
         },
       ],
     },
+    options: {
+      scales: {
+        r: {
+            angleLines: {
+                display: false
+            },
+            suggestedMin: 0
+        }
+    },
+    animation: {
+      onComplete: () => {
+        delayed = true;
+      },
+      delay: (context) => {
+        let delay = 0;
+        if (context.type === 'data' && context.mode === 'default' && !delayed) {
+          delay = context.dataIndex * 300 + context.datasetIndex * 100;
+        }
+        return delay;
+      },
+    },
+  },
   });
 </script>
 </div>
