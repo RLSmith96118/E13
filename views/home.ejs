@@ -1,19 +1,19 @@
 <%- include ('_partials/_header'); -%>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <div class ="container-fluid"></div>
-<div style="width: 800px;">
-    <h1>Water Quality Data</h1>
-    <canvas id="myChart"></canvas>
-</div>
 <div>
+    <h1>Water Quality Data</h1>
+</div>
+<div style="width: 800px;">
+  <canvas id="myChart"></canvas>
   <script>
   const data = {
-    'React': 185134,
-    'Vue': 195514,
-    'Angular': 80460,
-    'Svelte': 57022,
-    'Ember.js': 22165,
-    'Backbone.js': 27862
+    'Poo': 185134,
+    'Lemons': 195514,
+    'Goats': 80460,
+    'Chemicals': 57022,
+    'Flouride': 22165,
+    'Frogs': 27862
   };
   
   const ctx = document.getElementById('myChart').getContext('2d');
@@ -23,7 +23,7 @@
       labels: Object.keys(data),
       datasets: [
         {
-          label: 'Number of GitHub Stars',
+          label: 'Pollutants per Unit',
           data: Object.values(data),
         },
       ],
