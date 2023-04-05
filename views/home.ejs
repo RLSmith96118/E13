@@ -1,37 +1,36 @@
 <%- include ('_partials/_header'); -%>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <div class ="container-fluid"></div>
 <div style="width: 800px;">
     <h1>Water Quality Data</h1>
     <canvas id="myChart"></canvas>
 </div>
-<div style="width: 800px;">
-  <canvas id="acquisitions"></canvas>
-</div>
 <div>
-  <script type="module" src="C:\Users\Ryan\Documents\code\E13\controller\acquisitions.js"></script>
-</div>
-<div>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
-    const ctx = document.getElementById('myChart');
-    new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-          label: '# of Votes',
-          data: [12, 19, 3, 5, 2, 3],
-          borderWidth: 1
-        }]
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true
-          }
-        }
-      }
-    });
-  </script>
+  const data = {
+    'React': 185134,
+    'Vue': 195514,
+    'Angular': 80460,
+    'Svelte': 57022,
+    'Ember.js': 22165,
+    'Backbone.js': 27862
+  };
+  
+  const ctx = document.getElementById('myChart').getContext('2d');
+  const myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: Object.keys(data),
+      datasets: [
+        {
+          label: 'Number of GitHub Stars',
+          data: Object.values(data),
+        },
+      ],
+    },
+  });
+</script>
+</div>
+<div>
 </div>
 <%- include ('_partials/_footer'); -%>
