@@ -1,14 +1,13 @@
 <%- include ('_partials/_header'); -%>
- 
+<div class ="container-fluid"></div>
 <div>
+    <h1>Water Quality Data</h1>
     <canvas id="myChart"></canvas>
-  </div>
-  
+</div>
+<div>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  
   <script>
     const ctx = document.getElementById('myChart');
-  
     new Chart(ctx, {
       type: 'bar',
       data: {
@@ -28,5 +27,5 @@
       }
     });
   </script>
- 
+</div>
 <%- include ('_partials/_footer'); -%>
