@@ -1,68 +1,73 @@
 <%- include ('_partials/_header'); -%>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<div class ="container-fluid"></div>
+<div class="container-fluid"></div>
 <div>
-    <h1>Water Quality Data</h1>
+  <h1>Water Quality Data</h1>
 </div>
-<div style="width: 800px;">
+<div style="width: 900px">
   <canvas id="myChart"></canvas>
   <script>
-  const data = {
-    'Poo': 85134,
-    'Lemons': 95514,
-    'Goats': 80460,
-    'Chemicals': 57022,
-    'Flouride': 32165,
-    'Frogs': 67022,
-    'Blood': 90460,
-    'Poop': 85134,
-    'Bodies': 49420,
-    'MCFC': 49420,
-    'French Lemons': 100000,
-    'Tips': 130000,
-    'Trollies': 100000,
-    'British Apples': 49420,
-    'Water': 49420
-  }
+    const data = {
+      "2023-01-19 10:54:00": 0.045,
+      "2023-01-25 9:47:00": 0.038,
+      "2023-02-08 10:54:00": 0.037,
+      "2023-02-13 10:54:00": 0.037,
+      "2023-02-20 10:54:00": 0.031,
+      "2023-02-26 10:54:00": 0.035,
+      "2023-03-06 10:54:00": 0.038,
+    };
 
-  const ctx = document.getElementById('myChart').getContext('2d');
-  let delayed;
-  const myChart = new Chart(ctx, {
-    type: 'polarArea',
-    data: {
-      labels: Object.keys(data),
-      datasets: [
-        {
-          label: 'Pollutants per Unit',
-          data: Object.values(data),
-        },
-      ],
-    },
-    options: {
-      scales: {
-        r: {
-            angleLines: {
-                display: false
+    const ctx = document.getElementById("myChart").getContext("2d");
+    let delayed;
+    const myChart = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: Object.keys(data),
+        datasets: [
+          {
+            label: "Pollutants per Unit",
+            data: Object.values(data),
+          },
+        ],
+      },
+      options: {
+        scales: {
+          yAxes: [
+            {
+              scaleLabel: {
+                display: true,
+                labelString: "Phospate mg/l",
+              },
             },
-            suggestedMin: 0
-        }
-    },
-    animation: {
-      onComplete: () => {
-        delayed = true;
+          ],
+          xAxes: [
+            {
+              scaleLabel: {
+                display: true,
+                labelString: "Date Time",
+              },
+            },
+          ],
+        },
+        animation: {
+          onComplete: () => {
+            delayed = true;
+          },
+          delay: (context) => {
+            let delay = 0;
+            if (
+              context.type === "data" &&
+              context.mode === "default" &&
+              !delayed
+            ) {
+              delay = context.dataIndex * 300 + context.datasetIndex * 100;
+            }
+            return delay;
+          },
+        },
       },
-      delay: (context) => {
-        let delay = 0;
-        if (context.type === 'data' && context.mode === 'default' && !delayed) {
-          delay = context.dataIndex * 300 + context.datasetIndex * 100;
-        }
-        return delay;
-      },
-    },
-  },
-  });
-</script>
+    });
+  </script>
 </div>
-<div>
-</div>
+<div></div>
 <%- include ('_partials/_footer'); -%>
